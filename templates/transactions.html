@@ -1,0 +1,49 @@
+
+<!-- transactions.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <div class="card-header text-center">
+        <h2>Transaction History</h2>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Sender:</th>
+                    <th>Incoming Money by:</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+
+                    <td>
+                        {% if transaction.type == 'transfer_out' %}
+                            {{ transaction.sender_username }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if transaction.type == 'transfer_in' %}
+                            {{ transaction.recipient_username }}
+                        {% else %}
+                            -
+                        {% endif %}
+                     
+                    </td>
+                    <td>{{ transaction.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    <td>{{ transaction.type.replace('_', ' ').title() }}</td>
+                    <td>£{{ "%.2f"|format(transaction.amount) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+       
+    </div>
+</div>
+{% endblock %}

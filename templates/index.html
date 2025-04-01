@@ -1,0 +1,22 @@
+
+<!-- index.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <div class="card-header text-center">
+        <h2>Welcome, {{ user.username }}</h2>
+    </div>
+    <div class="card-body text-center">
+        <h3>Current Balance: £{{ "%.2f"|format(user.balance) }}</h3>
+        <div class="d-grid gap-2">
+            <a href="{{ url_for('deposit') }}" class="btn btn-primary">Deposit</a>
+            <a href="{{ url_for('withdraw') }}" class="btn btn-warning">Withdraw</a>
+            <a href="{{ url_for('transfer') }}" class="btn btn-info">Transfer</a>
+            <a href="{{ url_for('transactions') }}" class="btn btn-secondary">Transaction History</a>
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
